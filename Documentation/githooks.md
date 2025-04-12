@@ -127,8 +127,7 @@ need to be resolved and the result committed separately (see
 linkgit:git-merge[1]). At that point, this hook will not be executed,
 but the 'pre-commit' hook will, if it is enabled.
 
-prepare-commit-msg
-~~~~~~~~~~~~~~~~~~
+### prepare-commit-msg
 
 This hook is invoked by linkgit:git-commit[1] right after preparing the
 default log message, and before the editor is started.
@@ -152,21 +151,19 @@ be used as a replacement for the pre-commit hook.
 The sample `prepare-commit-msg` hook that comes with Git removes the
 help message found in the commented portion of the commit template.
 
-commit-msg
-~~~~~~~~~~
+### commit-msg
 
-This hook is invoked by linkgit:git-commit[1] and linkgit:git-merge[1], and can be
-bypassed with the `--no-verify` option.  It takes a single parameter,
-the name of the file that holds the proposed commit log message.
-Exiting with a non-zero status causes the command to abort.
-
-The hook is allowed to edit the message file in place, and can be used
-to normalize the message into some project standard format. It
-can also be used to refuse the commit after inspecting the message
-file.
-
-The default 'commit-msg' hook, when enabled, detects duplicate
-`Signed-off-by` trailers, and aborts the commit if one is found.
+* hook /
+  * -- invoked by -- linkgit:git-commit[1] & linkgit:git-merge[1]
+  * if you want to bypass -> `--no-verify` option
+  * 1! parameter
+    * name of the file / holds the proposed commit log message
+  * if you exit the script / non-zero -> `git commit` OR `git merge` command aborted
+  * uses
+    * normalize the message | SOME project standard format
+    * | AFTER inspecting the message file, refuse the commit
+  * default 'commit-msg' hook
+    * if DUPLICATED `Signed-off-by` trailers are found -> aborts the command
 
 post-commit
 ~~~~~~~~~~~
